@@ -176,9 +176,39 @@ BEGIN
 END;
 
 
+---(5) CURSOR
+-- Java : ResultSet과 비슷한 개념
+-- 처리 결과가 여러개의 행으로 구해지는 select문을 처리하려면 cursor 필요
+-- ResultSet(Java)처럼 DB 결과 내용을 가지고 온 다음에 하나의 행단위 처리
+-- 암시적 커서: 하나의 행이 리턴될때 사용
+-- 명시적 커서: 여러행이 리턴이 되는 질의문을 수행할때 사용
+-- %NOTFOUNT :커서의 영역의 자료가 모두 FETCH 되었다면  TRUE
+-- %FOUNT:커서 영역에 FETCH(가지고온 데이터) 되지 않은 자료가 있다면 TRUE
+-- %ISOPEN:
+-- %ROWCOUNT:커서가 얻어온 레코드수(튜플)의 갯수
+--(예) 부서 테이블의 모든 내용 조회하기?
+SET SERVEROUTPUT ON
+create or replace Procedure cursor_sample01
+IS
+  vdept dept%ROWTYPE;
+  CURSOR C1
+  IS
+  select * from dept;
 
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('부서번호/부서명/지역명');
+   DBMS_OUTPUT.PUT_LINE('------------------');
+   
+   OPEN C1;
+   LOOP
+    FETCH C1 INTO  vdept.deptno, vdept.dname, vdept.loc;
+    EXIT WHEN C1%NOTFOUND;
+    DBMS_OUTPUT.PUT_LINE(vdept.deptno||' '||vdept.dname||' '||vdept.loc);
+   END LOOP;   
+   
+   CLOSE C1;
+END;
 
-
-
+exec cursor_sample01;
 
 

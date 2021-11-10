@@ -58,3 +58,71 @@ update goodsinfo set maker='samsung' where code='10001';
 
 --
 select * from product;
+
+
+----------------------------Java_PRocedure 연결사용
+--1.
+--[결과]
+--2^3 = 8
+--I I   O
+--a_exponent가 음수이면 값을 0으로 변경하고,1을 반환
+
+create or replace procedure compute_power(
+	a_num In number,
+	a_exponent IN OUT number,
+	a_power OUT number
+)
+IS
+BEGIN
+ IF a_exponent < 0 THEN
+ a_exponent := 0;
+ END IF;
+ a_power := 1;
+ 
+ FOR i IN 1..a_exponent   LOOP
+   a_power := a_power*a_num;
+ END LOOP;
+ 
+END;
+
+
+------------------------------------
+create or replace procedure javatest(
+	p1 in varchar2,
+	p2 in out varchar2,
+	p3 out varchar2
+)
+as
+BEGIN
+	p2 := p1 || p2;
+	p3 := p1;
+	
+END;
+
+
+-----------------------Java_Procedure2: Java_Procedure_Test.zip
+[방과후 학습]
+--1. 저장 프로시저 정리
+--2. 과제 수행
+CREATE TABLE member3 (
+	id VARCHAR2(12),
+	passwd VARCHAR2(12),
+	name VARCHAR2(12),
+	age NUMBER,
+	addr VARCHAR2(50),
+	email VARCHAR2(30)
+)
+
+create or replace PROCEDURE user_insert(
+    user_id varchar2,
+    user_pw varchar2,
+    user_name varchar2,
+    user_age number,
+    user_addr varchar2,
+    user_email varchar2
+)
+IS
+BEGIN
+ insert into member3 
+ values(user_id,user_pw,user_name,user_age,user_addr,user_email);
+END;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+  <connection>
+    <productId>com.tomato.db.oracle_10g</productId>
+    <productName>Oracle 9i ~ 12c</productName>
+    <name>oracle1111</name>
+    <driverJar>C:\app\success\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6_g.jar</driverJar>
+    <driverClass>oracle.jdbc.OracleDriver</driverClass>
+    <url>jdbc:oracle:thin:@127.0.0.1:1521:orcl</url>
+    <properties>
+      <user>ajax</user>
+      <port>1521</port>
+      <password>ajax</password>
+      <sId>orcl</sId>
+      <host>127.0.0.1</host>
+      <internal_logon>normal</internal_logon>
+    </properties>
+    <extendedProperties>
+      <connectionString />
+    </extendedProperties>
+  </connection>
+</database>
+
